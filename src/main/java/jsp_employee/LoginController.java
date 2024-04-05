@@ -24,13 +24,15 @@ public class LoginController extends HttpServlet {
 	
 		if (dbPassword != null && dbPassword.equals(password)) {
 		    // Login successful
-			req.setAttribute("message","login successful");
-		    RequestDispatcher dispatcher = req.getRequestDispatcher("/success.jsp");
+//			req.setAttribute("message","login successful");
+			req.setAttribute("list",crud.getEmployee());
+		    RequestDispatcher dispatcher = req.getRequestDispatcher("/Welcome.jsp");
 		    dispatcher.forward(req, res);
 		    System.err.println("success");
 		} else {
 		    // Login failed
 			req.setAttribute("message","passord not match,plz enter valid passord");
+			
 		    RequestDispatcher dispatcher = req.getRequestDispatcher("/login.jsp");
 		    dispatcher.forward(req, res);
 		    System.err.println("err");

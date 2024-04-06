@@ -46,19 +46,54 @@ public class EmployeeCrud {
 		return password;
 	}
 
-	public String resister(String email) throws ClassNotFoundException, SQLException {
+	public int deleteEntry(int id) throws ClassNotFoundException, SQLException {
 		Connection connection = loadDriver();
-		String query = "select email from employee where email=?";
+		String query = "delete from employee where id=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(query);
-		preparedStatement.setString(1, email);
+		preparedStatement.setInt(1, id);
+		int set = preparedStatement.executeUpdate();
+		connection.close();
+		return set;
+	}
+
+	public Employee update(int id) throws ClassNotFoundException, SQLException {
+		Connection connection = loadDriver();
+		String query = "select * from employee where id=?";
+		PreparedStatement preparedStatement = connection.prepareStatement(query);
+		preparedStatement.setInt(1, id);
 		ResultSet set = preparedStatement.executeQuery();
-		String email1 = null;
+//		List<Employee> list = new ArrayList<Employee>();
+		Employee employee = new Employee();
 		while (set.next()) {
-			email1 = set.getString("email");
+			
+			employee.setId(set.getInt("id"));
+			employee.setName(set.getString("name"));
+			employee.setDesignation(set.getString("designation"));
+			employee.setEmail(set.getString("email"));
+			employee.setSalary(set.getDouble("salary"));
+			employee.setPhone(set.getLong("phone"));
+			employee.setPassword(set.getString("password"));
+//			list.add(employee);
+
 		}
 		connection.close();
-		return email1;
+//		System.out.println(list);
+		return employee;
+
 	}
+//	public String resister(String email) throws ClassNotFoundException, SQLException {
+//		Connection connection = loadDriver();
+//		String query = "select email from employee where email=?";
+//		PreparedStatement preparedStatement = connection.prepareStatement(query);
+//		preparedStatement.setString(1, email);
+//		ResultSet set = preparedStatement.executeQuery();
+//		String email1 = null;
+//		while (set.next()) {
+//			email1 = set.getString("email");
+//		}
+//		connection.close();
+//		return email1;
+//	}
 
 	public List<Employee> getEmployee() throws ClassNotFoundException, SQLException {
 		Connection connection = loadDriver();
@@ -66,7 +101,7 @@ public class EmployeeCrud {
 		PreparedStatement preparedStatement = connection.prepareStatement(query);
 		ResultSet set = preparedStatement.executeQuery();
 		List<Employee> list = new ArrayList<Employee>();
-		
+
 		while (set.next()) {
 			Employee employee = new Employee();
 			employee.setId(set.getInt("id"));
@@ -82,6 +117,22 @@ public class EmployeeCrud {
 		connection.close();
 		System.out.println(list);
 		return list;
+	}
+	
+	public int updateEmployee(Employee employee) throws ClassNotFoundException, SQLException {
+		Connection connection=loadDriver();
+		String query="update employee set name=?,phone=?,email=?,password=?,designation=?,salary=? where id=? ";
+		PreparedStatement preparedStatement=connection.prepareStatement(query);
+		preparedStatement.setInt(7, employee.getId());
+		preparedStatement.setString(1, employee.getName());
+		preparedStatement.setLong(2, employee.getPhone());
+		preparedStatement.setString(3, employee.getEmail());
+		preparedStatement.setString(4, employee.getPassword());
+		preparedStatement.setString(5, employee.getDesignation());
+		preparedStatement.setDouble(6, employee.getSalary());
+		int result = preparedStatement.executeUpdate();
+		connection.close();
+		return result;
 	}
 
 }

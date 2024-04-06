@@ -24,9 +24,46 @@
         text-align: left;
         padding: 8px;
     }
+    h1{
+    text-align: center; 
+  margin-top: 50px; 
+  }
+   .delete-button {
+        background-color: #f44336; /* Red background color */
+        color: white; /* Text color for contrast */
+        border: none; /* Remove border */
+        padding: 8px 12px; /* Adjust padding */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        border-radius: 4px; /* Add some rounded corners */
+    }
+    .delete-button:hover {
+        background-color: #cc0000; /* Darker red color on hover */
+    }
+    
+    .update-button {
+        background-color: #007bff; /* Blue background color */
+        color: white; /* Text color for contrast */
+        border: none; /* Remove border */
+        padding: 8px 12px; /* Adjust padding */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        border-radius: 4px; /* Add some rounded corners */
+    }
+    .update-button:hover {
+        background-color: #0056b3; /* Darker blue color on hover */
+    }
+
+    
+    
 </style>
 </head>
 <body>
+<h1>Login Successful</h1>
     <%
         List<Employee> list = (List) request.getAttribute("list");
     %>
@@ -39,6 +76,8 @@
             <th>password</th>
             <th>Designation</th>
             <th>Salary</th>
+            <th>Delete</th>
+            <th>Update</th>
         </tr>
     
         <%
@@ -52,6 +91,8 @@
             <td><%=employee.getPassword()%></td>
             <td><%=employee.getDesignation()%></td>
             <td><%=employee.getSalary()%></td>
+            <td><a href="delete?id=<%=employee.getId()%>"><button class="delete-button">DELETE</button></a></td>
+            <td><a href="update?id=<%=employee.getId()%>"><button class="update-button">UPDATE</button></a></td>
         </tr>
         <%
             }

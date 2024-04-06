@@ -17,12 +17,12 @@ public class LoginController extends HttpServlet {
 	String email=req.getParameter("email");
 	try {
 		String dbPassword=crud.login(email);
-		String dbemail=crud.resister(email);
+	
 		String password=req.getParameter("password");
 		
-		if (dbemail != null && dbemail.equals(email)) {
+		if (dbPassword != null ) {
 	
-		if (dbPassword != null && dbPassword.equals(password)) {
+		if ( dbPassword.equals(password)) {
 		    // Login successful
 //			req.setAttribute("message","login successful");
 			req.setAttribute("list",crud.getEmployee());

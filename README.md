@@ -45,5 +45,5 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 
 ## Screenshots
 
-![App Screenshot]("C:\Users\omkar\OneDrive\Pictures\Screenshots\Screenshot 2024-04-08 233526.png")
+![Screenshot 2024-04-08 233526](https://github.com/omkar1923/employee_management_using_J2EE/assets/109940631/a7930245-5f9e-4331-904c-e71ebe72599a)
 

@@ -62,7 +62,7 @@ public class EmployeeCrud {
 		PreparedStatement preparedStatement = connection.prepareStatement(query);
 		preparedStatement.setInt(1, id);
 		ResultSet set = preparedStatement.executeQuery();
-//		List<Employee> list = new ArrayList<Employee>();
+//	
 		Employee employee = new Employee();
 		while (set.next()) {
 			
@@ -73,11 +73,13 @@ public class EmployeeCrud {
 			employee.setSalary(set.getDouble("salary"));
 			employee.setPhone(set.getLong("phone"));
 			employee.setPassword(set.getString("password"));
-//			list.add(employee);
+//			
 
 		}
 		connection.close();
-//		System.out.println(list);
+//	.
+		
+		
 		return employee;
 
 	}

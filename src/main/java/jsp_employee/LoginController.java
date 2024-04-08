@@ -6,9 +6,11 @@ import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	@Override
@@ -17,14 +19,29 @@ public class LoginController extends HttpServlet {
 	String email=req.getParameter("email");
 	try {
 		String dbPassword=crud.login(email);
+		   
+		
+		
+		
 	
 		String password=req.getParameter("password");
 		
 		if (dbPassword != null ) {
 	
 		if ( dbPassword.equals(password)) {
+//			cookie
+			Cookie cookie=new Cookie("userEmail",email);
+			res.addCookie(cookie);
+			Cookie cookie2=new Cookie("userName","omkar");
+			res.addCookie(cookie2);
+//			creating httpSession
+			HttpSession httpSession=req.getSession();
+			httpSession.setAttribute("session", email);
+		
+		
+			
 		    // Login successful
-//			req.setAttribute("message","login successful");
+			req.setAttribute("message",email);
 			req.setAttribute("list",crud.getEmployee());
 		    RequestDispatcher dispatcher = req.getRequestDispatcher("/Welcome.jsp");
 		    dispatcher.forward(req, res);

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,10 +43,14 @@ button:hover {
 <body>
 <div class="container">
     <h2>Login</h2>
-    <% String message=(String)request.getAttribute("message"); 
-       if(message!=null) { %>
-    <h3><%=message %></h3>
-    <% } %>
+    <% 
+       String message = (String)request.getAttribute("message"); 
+       if(message != null) { 
+    %>
+    <h3><%= message %></h3>
+    <% 
+       } 
+    %>
     <form action="login" method="post">
         Email: <input type="text" name="email"><br><br>
         Password: <input type="password" name="password"><br><br>
